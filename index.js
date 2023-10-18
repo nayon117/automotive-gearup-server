@@ -26,6 +26,18 @@ app.use(express.json())
     try {
       // Connect the client to the server	(optional starting in v4.7)
       await client.connect();
+
+      const carsCollection = client.db('carsDB').collection('cars');
+
+      app.post('/cars', async (req, res) => {
+        const car = req.body;
+        const result = await carsCollection.insertOne(car)
+        res.send(result);
+      })
+
+
+
+
       // Send a ping to confirm a successful connection
       await client.db("admin").command({ ping: 1 });
       console.log("Pinged your deployment. You successfully connected to MongoDB!");

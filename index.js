@@ -28,7 +28,16 @@ app.use(express.json())
       await client.connect();
 
       const carsCollection = client.db('carsDB').collection('cars');
+      
+      // read 
+    app.get('/cars', async (req, res) => {
+      const cursor = carsCollection.find();
+      const result = await cursor.toArray()
+      res.send(result)
+    })
 
+
+      // create 
       app.post('/cars', async (req, res) => {
         const car = req.body;
         const result = await carsCollection.insertOne(car)

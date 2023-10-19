@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 require('dotenv').config()
-const { MongoClient, ServerApiVersion } = require('mongodb');
+const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 const app = express();
 
 const port = process.env.PORT || 5000;
@@ -30,11 +30,11 @@ app.use(express.json())
       const carsCollection = client.db('carsDB').collection('cars');
       
       // read 
-    app.get('/cars', async (req, res) => {
-      const cursor = carsCollection.find();
-      const result = await cursor.toArray()
-      res.send(result)
-    })
+    // app.get('/cars', async (req, res) => {
+    //   const cursor = carsCollection.find();
+    //   const result = await cursor.toArray()
+    //   res.send(result)
+    // })
 
       // find by brand 
       app.get('/cars/:brand', async (req, res) => {
@@ -43,6 +43,16 @@ app.use(express.json())
         res.send(result)
       })
 
+      // find by id
+      app.get("/details/:id", async (req, res) => {
+        const id = req.params.id;
+        const query = {_id: new ObjectId(id),
+        };
+        const result = await carsCollection.findOne(query);
+        res.send(result);
+      });
+     
+
       // create 
       app.post('/cars', async (req, res) => {
         const car = req.body;
@@ -50,7 +60,38 @@ app.use(express.json())
         res.send(result);
       })
 
+      //  update
 
+      //  find id for update 
+      app.get('/update/:id', async (req, res) => {
+        const id = req.params.id;
+        const query = { _id: new ObjectId(id) }
+        const result = await  carsCollection.findOne(query);
+        res.send(result);
+    })
+
+    //  use put method for updating 
+      app.put('/update/:id', async (req, res) => {
+        const id = req.params.id;
+        const filter = { _id: new ObjectId(id) }
+        const options = { upsert: true };
+        const updatedCar = req.body;
+
+        const car = {
+            $set: {
+                name: updatedCar.name,
+                brand: updatedCar.brand,
+                type: updatedCar.type,
+                price: updatedCar.price,
+                description: updatedCar.description,
+                rating: updatedCar.rating,
+                image: updatedCar.image
+            }
+        }
+
+        const result = await carsCollection.updateOne(filter, car, options);
+        res.send(result);
+    })
 
 
       // Send a ping to confirm a successful connection
@@ -65,7 +106,7 @@ app.use(express.json())
   
 
   app.get("/", (req, res) => {
-    res.send("Crud is running on the site");
+    res.send("Crud is running on port");
   });
   
   app.listen(port, () => {

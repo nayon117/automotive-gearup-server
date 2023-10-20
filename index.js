@@ -25,7 +25,7 @@ app.use(express.json())
   async function run() {
     try {
       // Connect the client to the server	(optional starting in v4.7)
-      // await client.connect();
+      await client.connect();
 
       const carsCollection = client.db('carsDB').collection('cars');
       const cartsCollection = client.db('cartsDB').collection('carts');
@@ -108,11 +108,34 @@ app.use(express.json())
       const result = await cursor.toArray()
       res.send(result)
     })
-
+      // delete 
+      app.delete('/carts/:id', async (req, res) => {
+        const id = req.params.id;  
+        console.log(id);
+        const query = { _id:(id) };
+        const result = await cartsCollection.deleteOne(query);
+        console.log(result);
+        res.send(result);
+        // try {
+        //   const result = await cartsCollection.deleteOne(query);
+        //   if (result.deletedCount === 1) {
+        //     console.log(`Deleted item with _id: ${id}`);
+        //     res.send(result);
+        //   } else {
+        //     console.log(`Item with _id: ${id} not found.`);
+        //     res.status(404).send("Item not found");
+        //   }
+        // } catch (error) {
+        //   console.error("Error while deleting item:", error);
+        //   res.status(500).send("Internal Server Error");
+        // }
+       
+    });
+    
 
       // Send a ping to confirm a successful connection
-      // await client.db("admin").command({ ping: 1 });
-      // console.log("Pinged your deployment. You successfully connected to MongoDB!");
+      await client.db("admin").command({ ping: 1 });
+      console.log("Pinged your deployment. You successfully connected to MongoDB!");
     } finally {
       // Ensures that the client will close when you finish/error
       // await client.close();

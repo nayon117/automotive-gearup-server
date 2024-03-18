@@ -6,6 +6,8 @@ const app = express();
 
 // Import routes
 const carRoutes = require('./routes/cars')
+const paymentRoutes = require('./routes/payments')
+const bookingRoutes = require('./routes/bookings')
 
 // middleware
 applyMiddleware(app);
@@ -17,6 +19,8 @@ connectDB();
 
 // routes
 app.use(carRoutes)
+app.use(paymentRoutes)
+app.use(bookingRoutes)
 
 
 // server start point

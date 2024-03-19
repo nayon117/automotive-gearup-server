@@ -8,6 +8,7 @@ const app = express();
 const carRoutes = require('./routes/cars')
 const paymentRoutes = require('./routes/payments')
 const bookingRoutes = require('./routes/bookings')
+const userRoutes = require('./routes/users')
 
 // middleware
 applyMiddleware(app);
@@ -21,6 +22,7 @@ connectDB();
 app.use(carRoutes)
 app.use(paymentRoutes)
 app.use(bookingRoutes)
+app.use(userRoutes)
 
 
 // server start point

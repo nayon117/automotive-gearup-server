@@ -7,9 +7,9 @@ const userSchema = new Schema({
     image: String,
     role: {
         type: String,
-        default: "student"
+        default: "user"
     }
-})
+},{versionKey: false})
 
 const User = model("User", userSchema);
 module.exports = User;

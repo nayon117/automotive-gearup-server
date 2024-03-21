@@ -72,27 +72,27 @@
 //     })
 
 //     //  use put method for updating 
-//       app.put('/update/:id', async (req, res) => {
-//         const id = req.params.id;
-//         const filter = { _id: new ObjectId(id) }
-//         const options = { upsert: true };
-//         const updatedCar = req.body;
+    //   app.put('/update/:id', async (req, res) => {
+    //     const id = req.params.id;
+    //     const filter = { _id: new ObjectId(id) }
+    //     const options = { upsert: true };
+    //     const updatedCar = req.body;
 
-//         const car = {
-//             $set: {
-//                 name: updatedCar.name,
-//                 brand: updatedCar.brand,
-//                 type: updatedCar.type,
-//                 price: updatedCar.price,
-//                 description: updatedCar.description,
-//                 rating: updatedCar.rating,
-//                 image: updatedCar.image
-//             }
-//         }
+    //     const car = {
+    //         $set: {
+    //             name: updatedCar.name,
+    //             brand: updatedCar.brand,
+    //             type: updatedCar.type,
+    //             price: updatedCar.price,
+    //             description: updatedCar.description,
+    //             rating: updatedCar.rating,
+    //             image: updatedCar.image
+    //         }
+    //     }
 
-//         const result = await carsCollection.updateOne(filter, car, options);
-//         res.send(result);
-//       })
+    //     const result = await carsCollection.updateOne(filter, car, options);
+    //     res.send(result);
+    //   })
       
 //       // carts
 

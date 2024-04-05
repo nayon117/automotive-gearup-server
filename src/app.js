@@ -5,10 +5,11 @@ require("dotenv").config();
 const app = express();
 
 // Import routes
-const carRoutes = require('./routes/cars')
-const paymentRoutes = require('./routes/payments')
-const bookingRoutes = require('./routes/bookings')
-const userRoutes = require('./routes/users')
+const carRoutes = require('./routes/cars/index')
+const paymentRoutes = require('./routes/payments/index')
+const bookingRoutes = require('./routes/bookings/index')
+const userRoutes = require('./routes/users/index')
+const cartRoutes = require('./routes/carts/index')
 
 // middleware
 applyMiddleware(app);
@@ -23,6 +24,7 @@ app.use(carRoutes)
 app.use(paymentRoutes)
 app.use(bookingRoutes)
 app.use(userRoutes)
+app.use(cartRoutes)
 
 
 // server start point

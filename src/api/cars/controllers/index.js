@@ -5,6 +5,8 @@ const findOneCar = require("./findOneCar");
 const updateCar = require("./updateCar");
 const carRequests = require("./carRequests");
 const deleteCar = require("./deleteCar");
+const updateCarStatus = require("./updateCarStatus");
+const findApprovedCar = require("./findApprovedCar");
 
 
 module.exports={
@@ -14,5 +16,7 @@ module.exports={
     findOneCar,
     updateCar,
     carRequests,
-    deleteCar
+    deleteCar,
+    updateCarStatus,
+    findApprovedCar
 }

@@ -5,7 +5,7 @@ const deleteCar = async (req, res) => {
   
     try {
       const result = await Cars.deleteOne({ _id: id });
-      if (result.deletedCount === 1) {
+      if (result) {
         res.json({ message: 'Car deleted successfully' });
       } else {
         res.status(404).json({ message: 'Car not found' });

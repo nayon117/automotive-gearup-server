@@ -2,9 +2,15 @@ const Cars = require("../../../models/Cars");
 
 const createCar = async (req, res) => {
   try {
-    const car = req.body;
-    const newCar = await new Cars(car).save();
-    res.status(201).send(newCar);
+    const carDetails = req.body;
+    const newCar = new Cars({
+      ...carDetails,
+      status: "pending",
+    });
+   // Save the new course to the database
+   const result = await newCar.save();
+
+   res.send(result);
   } catch (error) {
     res.status(500).send(error.message);
   }
